@@ -97,7 +97,6 @@ with st.expander("🔍 Business Insights"):
     - 🗓️ **Q4 (Oct–Dec)** has **peak sales** — allocate marketing budget and inventory accordingly.
     - 🏆 Top 5 products contribute disproportionately to total sales — consider bundling or promoting these.
     """)
-st.caption("📍 Built with ❤️ by Sai Kiran using Streamlit | Powered by Python and Plotly")
 # --- Optional: Sales Forecast using Prophet ---
 from prophet import Prophet
 import plotly.graph_objs as go
@@ -138,3 +137,6 @@ with st.expander("📈 Sales Forecast (Next 3 Months)"):
     # Show next month's forecast (optional)
     next_month_pred = forecast[forecast['ds'] > monthly_df['ds'].max()]['yhat'].iloc[0]
     st.metric("📅 Forecast for Next Month", f"₹{next_month_pred:,.0f}")
+
+st.caption("📍 Built with ❤️ by Sai Kiran using Streamlit | Powered by Python and Plotly")
+
