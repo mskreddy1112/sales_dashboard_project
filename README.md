@@ -20,7 +20,11 @@ Make sure you have Python installed. Then, clone this repo and run:
 
 ```bash
 pip install -r requirements.txt
+```
 
 ## 🚀 How to Run Streamlit App
 ```bash
 streamlit run app/sales_dashboard.py
+or use
+python -m streamlit run app/sales_dashboard.py
+```
