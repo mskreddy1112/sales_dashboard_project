@@ -9,9 +9,6 @@ st.set_page_config(
     layout="wide",                             # 'wide' or 'centered'
     initial_sidebar_state="expanded",          # or "collapsed"
 )
-
-st.title("📊 Sales Performance Dashboard")
-
 # --- Load Data ---
 df = pd.read_csv("Cleaned_Superstore.csv", parse_dates=['Order Date', 'Ship Date'])
 
