@@ -98,3 +98,43 @@ with st.expander("🔍 Business Insights"):
     - 🏆 Top 5 products contribute disproportionately to total sales — consider bundling or promoting these.
     """)
 st.caption("📍 Built with ❤️ by Sai Kiran using Streamlit | Powered by Python and Plotly")
+# --- Optional: Sales Forecast using Prophet ---
+from prophet import Prophet
+import plotly.graph_objs as go
+
+with st.expander("📈 Sales Forecast (Next 3 Months)"):
+    st.subheader("🔮 Predictive Sales Forecast")
+
+    # Prepare monthly sales data
+    monthly_df = filtered_df.groupby('Order Date')['Sales'].sum().resample('M').sum().reset_index()
+    monthly_df.columns = ['ds', 'y']
+
+    # Fit Prophet model
+    m = Prophet()
+    m.fit(monthly_df)
+
+    # Create future dataframe and forecast
+    future = m.make_future_dataframe(periods=3, freq='M')
+    forecast = m.predict(future)
+
+    # Plot actual vs forecast
+    fig_forecast = go.Figure()
+    fig_forecast.add_trace(go.Scatter(
+        x=monthly_df['ds'], y=monthly_df['y'],
+        mode='lines+markers', name="Actual Sales", line=dict(color='blue')
+    ))
+    fig_forecast.add_trace(go.Scatter(
+        x=forecast['ds'], y=forecast['yhat'],
+        mode='lines', name="Forecast", line=dict(color='orange', dash='dash')
+    ))
+    fig_forecast.update_layout(
+        title="📊 Forecasted Monthly Sales",
+        xaxis_title="Date", yaxis_title="Sales",
+        margin=dict(l=40, r=40, t=60, b=40),
+        legend=dict(x=0, y=1.1, orientation="h")
+    )
+    st.plotly_chart(fig_forecast, use_container_width=True)
+
+    # Show next month's forecast (optional)
+    next_month_pred = forecast[forecast['ds'] > monthly_df['ds'].max()]['yhat'].iloc[0]
+    st.metric("📅 Forecast for Next Month", f"₹{next_month_pred:,.0f}")
