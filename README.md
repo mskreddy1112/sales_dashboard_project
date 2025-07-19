@@ -14,6 +14,13 @@ This project is a full data analytics solution for analyzing and visualizing sal
 - `Cleaned_Superstore.csv` → Cleaned CSV file
 - `requirements.txt` → Dependencies
 
+## ⚙️ Installation Instructions
+
+Make sure you have Python installed. Then, clone this repo and run:
+
+```bash
+pip install -r requirements.txt
+
 ## 🚀 How to Run Streamlit App
 ```bash
 streamlit run app/sales_dashboard.py
