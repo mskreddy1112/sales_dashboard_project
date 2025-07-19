@@ -2,6 +2,15 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
+# Set page config
+st.set_page_config(
+    page_title="Sales Performance Dashboard",  # <-- Custom browser tab title
+    page_icon="📊",                            # <-- Emoji or path to custom icon
+    layout="wide",                             # 'wide' or 'centered'
+    initial_sidebar_state="expanded",          # or "collapsed"
+)
+
+st.title("📊 Sales Performance Dashboard")
 
 # --- Load Data ---
 df = pd.read_csv("Cleaned_Superstore.csv", parse_dates=['Order Date', 'Ship Date'])
